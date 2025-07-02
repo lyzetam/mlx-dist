@@ -4,6 +4,7 @@ from mlx_lm import load, stream_generate
 import time
 import psutil
 import os
+import sys
 
 def log_system_stats(rank):
     """Log system resource usage"""
@@ -17,6 +18,11 @@ def distributed_inference_with_monitoring():
         world = mx.distributed.init(backend="mpi")
         rank = world.rank()
         size = world.size()
+        
+        # Verify we have exactly 3 nodes
+        if size != 3:
+            print(f"ERROR: Expected 3 nodes but got {size}. Check your hostfile and SSH setup.")
+            sys.exit(1)
         
         if rank == 0:
             print("="*50)
@@ -89,8 +95,10 @@ def distributed_inference_with_monitoring():
             print("="*50)
             
     except Exception as e:
-        print(f"[Node {rank}] Error: {e}")
-        mx.distributed.abort()
+        print(f"[Node {rank if 'rank' in locals() else 'unknown'}] Error: {e}")
+        import traceback
+        traceback.print_exc()
+        sys.exit(1)
 
 if __name__ == "__main__":
     distributed_inference_with_monitoring()

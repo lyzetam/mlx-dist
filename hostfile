@@ -1,9 +1,7 @@
 # MLX Distributed Hostfile
-# Format: hostname/IP slots=number_of_processes
+# Master node - MacBook Pro (local)
+localhost slots=1
 
-# Master node - MacBook Pro
-10.85.10.239 slots=1
-
-# Worker nodes - Mac minis
-10.85.35.29 slots=1
-10.85.35.205 slots=1
+# Worker nodes - Mac minis (with username)
+mm@10.85.35.29 slots=1
+mm@10.85.35.205 slots=1

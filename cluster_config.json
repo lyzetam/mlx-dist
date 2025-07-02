@@ -1,0 +1,26 @@
+{
+  "nodes": [
+    {
+      "name": "macbook-pro",
+      "ip": "10.85.10.239",
+      "role": "master",
+      "slots": 1
+    },
+    {
+      "name": "mac-mini-1",
+      "ip": "10.85.35.29",
+      "role": "worker",
+      "slots": 1
+    },
+    {
+      "name": "mac-mini-2",
+      "ip": "10.85.35.205",
+      "role": "worker",
+      "slots": 1
+    }
+  ],
+  "network": {
+    "interface": "en0",
+    "tcp_links": 4
+  }
+}
